@@ -152,7 +152,7 @@
 	mdio0 {
 		#address-cells = <1>;
 		#size-cells = <0>;
-		compatible = "snps,dwmac-mdio";
+		compatible = "ti,dp83867";
 		phy0: ethernet-phy@0 {
 			reg = <0>;
 		};
@@ -548,7 +548,7 @@
 	pinctrl-0 = <&sdmmc1_b4_pins_a>;
 	pinctrl-1 = <&sdmmc1_b4_od_pins_a>;
 	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a>;
-	cd-gpios = <&gpiob 7 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+	cd-gpios = <&gpiog 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 	disable-wp;
 	st,neg-edge;
 	bus-width = <4>;
