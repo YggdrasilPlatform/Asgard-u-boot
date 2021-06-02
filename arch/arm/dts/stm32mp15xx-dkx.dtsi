@@ -182,70 +182,17 @@
 	status = "okay";
 	/delete-property/dmas;
 	/delete-property/dma-names;
+};
 
-	hdmi-transmitter@39 {
-		compatible = "sil,sii9022";
-		reg = <0x39>;
-		iovcc-supply = <&v3v3_hdmi>;
-		cvcc12-supply = <&v1v2_hdmi>;
-		reset-gpios = <&gpioa 10 GPIO_ACTIVE_LOW>;
-		interrupts = <1 IRQ_TYPE_EDGE_FALLING>;
-		interrupt-parent = <&gpiog>;
-		#sound-dai-cells = <0>;
-		status = "okay";
-
-		ports {
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-			port@0 {
-				reg = <0>;
-				sii9022_in: endpoint {
-					remote-endpoint = <&ltdc_ep0_out>;
-				};
-			};
-
-			port@3 {
-				reg = <3>;
-				sii9022_tx_endpoint: endpoint {
-					remote-endpoint = <&i2s2_endpoint>;
-				};
-			};
-		};
-	};
-
-	cs42l51: cs42l51@4a {
-		compatible = "cirrus,cs42l51";
-		reg = <0x4a>;
-		#sound-dai-cells = <0>;
-		VL-supply = <&v3v3>;
-		VD-supply = <&v1v8_audio>;
-		VA-supply = <&v1v8_audio>;
-		VAHP-supply = <&v1v8_audio>;
-		reset-gpios = <&gpiog 9 GPIO_ACTIVE_LOW>;
-		clocks = <&sai2a>;
-		clock-names = "MCLK";
-		status = "okay";
-
-		cs42l51_port: port {
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-			cs42l51_tx_endpoint: endpoint@0 {
-				reg = <0>;
-				remote-endpoint = <&sai2a_endpoint>;
-				frame-master;
-				bitclock-master;
-			};
-
-			cs42l51_rx_endpoint: endpoint@1 {
-				reg = <1>;
-				remote-endpoint = <&sai2b_endpoint>;
-				frame-master;
-				bitclock-master;
-			};
-		};
-	};
+&i2c2 {
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&i2c2_pins_a>;
+	pinctrl-1 = <&i2c2_sleep_pins_a>;
+	i2c-scl-rising-time-ns = <100>;
+	i2c-scl-falling-time-ns = <7>;
+	status = "okay";
+	/delete-property/dmas;
+	/delete-property/dma-names;
 };
 
 &i2c4 {
