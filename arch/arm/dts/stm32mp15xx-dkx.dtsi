@@ -306,7 +306,7 @@
 			vddcore: buck1 {
 				regulator-name = "vddcore";
 				regulator-min-microvolt = <1200000>;
-				regulator-max-microvolt = <1350000>;
+				regulator-max-microvolt = <1200000>;
 				regulator-always-on;
 				regulator-initial-mode = <0>;
 				regulator-over-current-protection;
@@ -341,7 +341,7 @@
 			};
 
 			v1v8_audio: ldo1 {
-				regulator-name = "v1v8_audio";
+				regulator-name = "v1v8";
 				regulator-min-microvolt = <1800000>;
 				regulator-max-microvolt = <1800000>;
 				regulator-always-on;
@@ -349,9 +349,9 @@
 			};
 
 			v3v3_hdmi: ldo2 {
-				regulator-name = "v3v3_hdmi";
-				regulator-min-microvolt = <3300000>;
-				regulator-max-microvolt = <3300000>;
+				regulator-name = "v2v5";
+				regulator-min-microvolt = <2500000>;
+				regulator-max-microvolt = <2500000>;
 				regulator-always-on;
 				interrupts = <IT_CURLIM_LDO2 0>;
 			};
@@ -371,16 +371,16 @@
 
 			vdda: ldo5 {
 				regulator-name = "vdda";
-				regulator-min-microvolt = <2900000>;
-				regulator-max-microvolt = <2900000>;
+				regulator-min-microvolt = <3300000>;
+				regulator-max-microvolt = <3300000>;
 				interrupts = <IT_CURLIM_LDO5 0>;
 				regulator-boot-on;
 			};
 
 			v1v2_hdmi: ldo6 {
-				regulator-name = "v1v2_hdmi";
-				regulator-min-microvolt = <1200000>;
-				regulator-max-microvolt = <1200000>;
+				regulator-name = "v1v0";
+				regulator-min-microvolt = <1000000>;
+				regulator-max-microvolt = <1000000>;
 				regulator-always-on;
 				interrupts = <IT_CURLIM_LDO6 0>;
 			};
