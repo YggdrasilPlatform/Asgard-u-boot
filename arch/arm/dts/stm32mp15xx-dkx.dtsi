@@ -6,6 +6,7 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/mfd/st,stpmic1.h>
+#include <dt-bindings/net/ti-dp83867.h>
 
 / {
 	memory@c0000000 {
@@ -68,17 +69,6 @@
 			linux,default-trigger = "heartbeat";
 			default-state = "off";
 		};
-	};
-
-	sound {
-		compatible = "audio-graph-card";
-		label = "STM32MP1-DK";
-		routing =
-			"Playback" , "MCLK",
-			"Capture" , "MCLK",
-			"MICL" , "Mic Bias";
-		dais = <&sai2a_port &sai2b_port &i2s2_port>;
-		status = "okay";
 	};
 
 	vin: vin {
@@ -388,23 +378,6 @@
 	status = "disabled";
 };
 
-&i2s2 {
-	clocks = <&rcc SPI2>, <&rcc SPI2_K>, <&rcc PLL3_Q>, <&rcc PLL3_R>;
-	clock-names = "pclk", "i2sclk", "x8k", "x11k";
-	pinctrl-names = "default", "sleep";
-	pinctrl-0 = <&i2s2_pins_a>;
-	pinctrl-1 = <&i2s2_sleep_pins_a>;
-	status = "okay";
-
-	i2s2_port: port {
-		i2s2_endpoint: endpoint {
-			remote-endpoint = <&sii9022_tx_endpoint>;
-			format = "i2s";
-			mclk-fs = <256>;
-		};
-	};
-};
-
 &ipcc {
 	status = "okay";
 };
@@ -423,7 +396,6 @@
 	port {
 		ltdc_ep0_out: endpoint@0 {
 			reg = <0>;
-			remote-endpoint = <&sii9022_in>;
 		};
 	};
 };
@@ -449,51 +421,6 @@
 
 &rtc {
 	status = "okay";
-};
-
-&sai2 {
-	clocks = <&rcc SAI2>, <&rcc PLL3_Q>, <&rcc PLL3_R>;
-	clock-names = "pclk", "x8k", "x11k";
-	pinctrl-names = "default", "sleep";
-	pinctrl-0 = <&sai2a_pins_a>, <&sai2b_pins_b>;
-	pinctrl-1 = <&sai2a_sleep_pins_a>, <&sai2b_sleep_pins_b>;
-	status = "okay";
-
-	sai2a: audio-controller@4400b004 {
-		#clock-cells = <0>;
-		dma-names = "tx";
-		clocks = <&rcc SAI2_K>;
-		clock-names = "sai_ck";
-		status = "okay";
-
-		sai2a_port: port {
-			sai2a_endpoint: endpoint {
-				remote-endpoint = <&cs42l51_tx_endpoint>;
-				format = "i2s";
-				mclk-fs = <256>;
-				dai-tdm-slot-num = <2>;
-				dai-tdm-slot-width = <32>;
-			};
-		};
-	};
-
-	sai2b: audio-controller@4400b024 {
-		dma-names = "rx";
-		st,sync = <&sai2a 2>;
-		clocks = <&rcc SAI2_K>, <&sai2a>;
-		clock-names = "sai_ck", "MCLK";
-		status = "okay";
-
-		sai2b_port: port {
-			sai2b_endpoint: endpoint {
-				remote-endpoint = <&cs42l51_rx_endpoint>;
-				format = "i2s";
-				mclk-fs = <256>;
-				dai-tdm-slot-num = <2>;
-				dai-tdm-slot-width = <32>;
-			};
-		};
-	};
 };
 
 &sdmmc1 {
