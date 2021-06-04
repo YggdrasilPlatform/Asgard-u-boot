@@ -140,16 +140,11 @@
 	phy-handle = <&phy0>;
 
 	mdio0 {
+		compatible = "snps,dwmac-mdio";
 		#address-cells = <1>;
 		#size-cells = <0>;
-		compatible = "ti,dp83867";
 		phy0: ethernet-phy@0 {
 			reg = <0>;
-			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_25_NS>;
-			ti,tx-internal-delay = <DP83867_RGMIIDCTL_250_PS>;
-			ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_8_B_NIB>;
-			ti,min-output-impedance;
-			ti,dp83867-rxctl-strap-quirk;
 		};
 	};
 };
