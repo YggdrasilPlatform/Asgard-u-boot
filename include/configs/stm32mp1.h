@@ -136,6 +136,8 @@
 		"then env set boot_targets ubifs0; fi;" \
 		"if test ${boot_device} = nor;" \
 		"then env set boot_targets mmc0; fi;" \
+		"ext4load mmc 0:4 C0000000 /boot/splash.bmp;" \
+		"bmp d C0000000;" \
 		"run distro_bootcmd;" \
 	"fi;\0"
 
