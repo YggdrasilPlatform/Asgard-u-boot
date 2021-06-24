@@ -126,18 +126,20 @@
 				 <STM32_PINMUX('G', 14, AF11)>, /* ETH_RGMII_TXD1 */
 				 <STM32_PINMUX('C', 2, AF11)>, /* ETH_RGMII_TXD2 */
 				 <STM32_PINMUX('E', 2, AF11)>, /* ETH_RGMII_TXD3 */
-				 <STM32_PINMUX('B', 11, AF11)>, /* ETH_RGMII_TX_CTL */
-				 <STM32_PINMUX('C', 1, AF11)>; /* ETH_MDC */
+				 <STM32_PINMUX('B', 11, AF11)>; /* ETH_RGMII_TX_CTL */
+				 
 			bias-disable;
 			drive-push-pull;
 			slew-rate = <2>;
 		};
 		pins2 {
-			pinmux = <STM32_PINMUX('A', 2, AF11)>; /* ETH_MDIO */
-			bias-disable;
+			pinmux = <STM32_PINMUX('A', 2, AF11)>, /* ETH_MDIO  */
+				 <STM32_PINMUX('C', 1, AF11)>; /* ETH_MDC   */
+			bias-pull-up;
 			drive-push-pull;
 			slew-rate = <0>;
 		};
+		
 		pins3 {
 			pinmux = <STM32_PINMUX('C', 4, AF11)>, /* ETH_RGMII_RXD0 */
 				 <STM32_PINMUX('C', 5, AF11)>, /* ETH_RGMII_RXD1 */
@@ -146,6 +148,12 @@
 				 <STM32_PINMUX('A', 1, AF11)>, /* ETH_RGMII_RX_CLK */
 				 <STM32_PINMUX('A', 7, AF11)>; /* ETH_RGMII_RX_CTL */
 			bias-disable;
+		};
+		
+		pins4 {
+			pinmux = <STM32_PINMUX('G', 0, GPIO)>; /* ETH_MDINT */
+			bias-pull-up;
+			slew-rate = <0>;
 		};
 	};
 
